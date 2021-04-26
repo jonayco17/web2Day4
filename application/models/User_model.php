@@ -68,17 +68,22 @@
 
             $result = $this->db->get('users');
 
-            if($result->num_rows() == 1){
-                return true;
-            }else{
-                return false;
-            }
+            return $result->num_rows() == 1 ? true : false;
         }
 
-        public function update_user($enc_password){
+        public function compare_user_password($id, $password){
+            $this->db->where('id', $id);
+            $this->db->where('password', $password);
+
+            $result = $this->db->get('users');
+
+            return $result->num_rows() == 1 ? true : false;
+        }
+
+        public function update_user($password){
             $data= array(
                 'username' => $this->input->post('username'),
-                'password' => $enc_password,
+                'password' => $password,
                 'name' => $this->input->post('name'),
                 'email' => $this->input->post('email'),
                 'address' => $this->input->post('address'),

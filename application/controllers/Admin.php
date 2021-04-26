@@ -63,9 +63,13 @@
 		public function update(){
 			if($this->check_admin_permission()){
 
-                $enc_password = md5($this->input->post('password'));
+                //Check if Password is Changed
+                $password = $this->input->post('password');
+                if(!$this->compare_password($password)){
+                    $password = md5($password);
+                }
 
-                $this->user_model->update_user($enc_password);
+                $this->user_model->update_user($password);
 
                 $this->session->set_flashdata('user_updated', 'User Updated Successfully');
 
@@ -77,16 +81,17 @@
 
         //Helper
 
+        private function compare_password($password){
+            $id = $this->session->userdata('user_id');
+            return $this->user_model->compare_user_password($id, $password);
+        }
+
         private function check_admin_permission(){
             if(!$this->session->userdata('logged_in')){
                 return false;
             }
 
             $id = $this->session->userdata('user_id');
-            if($this->user_model->check_user_is_admin($id)){
-                return true;
-            }else{
-                return false;
-            }
+            return $this->user_model->check_user_is_admin($id);
         }
     }

@@ -17,6 +17,7 @@
                             <li class="nav-item"><a href="<?php echo base_url();?>users/register">Register</a></li>
                             <li class="nav-item"><a href="<?php echo base_url();?>users/login">Log-in</a></li>
                         <?php endif; ?>
+                        
                         <?php if($this->session->userdata('logged_in')): ?>
                             <li class="nav-item"><a href="<?php echo base_url();?>posts/create">Create Post</a></li>
                             <li class="nav-item"><a href="<?php echo base_url();?>users/logout">Logout</a></li>
