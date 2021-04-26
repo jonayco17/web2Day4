@@ -12,7 +12,7 @@
                     <div id="navbarCollapse" class="collapse navbar-collapse order-3">
                         <ul class="navbar-nav">
                         <?php if($this->session->userdata('user_type') == 'admin'): ?>
-                            <li class="nav-item"><a class="nav-link" href="<?php  echo base_url();?>/admin">Admin Panel</a></li>              
+                            <li class="nav-item"><a class="nav-link" href="<?php  echo base_url();?>admin">Admin Panel</a></li>              
                         <?php endif; ?>
                         </ul>
                         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
@@ -33,18 +33,31 @@
                     </div>
                 </div>
             </nav>
+                
+            <div class="content-wrapper" >
+                <div class="content-header">
+                    <div class="container">
+                        <div class="row <?= $title == 'Manage Users' ? '' : 'd-flex justify-content-center' ?>">
+                            <div class="col-md-6 ">
+                                <?php if($this->session->flashdata('post_success')):?>
+                                    <?= '<p class="alert alert-success">'.$this->session->flashdata('post_success').'</p>'?>
+                                <?php endif ?>
 
-            <div class="container">
+                                <?php if($this->session->flashdata('user_error')):?>
+                                    <?= '<p class="alert alert-danger">'.$this->session->flashdata('user_error').'</p>'?>
+                                <?php endif ?>
 
-                <?php if($this->session->flashdata('post_success')):?>
-                    <?= '<p class="alert alert-success">'.$this->session->flashdata('post_success').'</p>'?>
-                <?php endif ?>
+                                <?php if($this->session->flashdata('user_success')):?>
+                                    <?= '<p class="alert alert-success">'.$this->session->flashdata('user_success').'</p>'?>
+                                <?php endif ?>
 
-                <?php if($this->session->flashdata('user_error')):?>
-                    <?= '<p class="alert alert-danger">'.$this->session->flashdata('user_error').'</p>'?>
-                <?php endif ?>
+                                <h1 class="m-0 text-dark"><?= $title ?></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <?php if($this->session->flashdata('user_success')):?>
-                    <?= '<p class="alert alert-success">'.$this->session->flashdata('user_success').'</p>'?>
-                <?php endif ?>
-
+                <div class="content">
+                    <div class="container">
+                        <div class="row <?= $title == 'Manage Users' ? '' : 'd-flex justify-content-center' ?>">
+                            <div class="col-md-6">

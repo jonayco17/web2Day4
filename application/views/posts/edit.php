@@ -1,5 +1,3 @@
-<h2><?= $title ?></h2>
-
 <?= validation_errors()?>
 
 <?= form_open('posts/update')?>

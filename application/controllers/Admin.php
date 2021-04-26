@@ -2,12 +2,12 @@
     class Admin extends CI_Controller{
         public function index(){
             if($this->check_admin_permission()){
-                $data['title'] = 'Manage Users';
-
+                
+                $title = array('title' => 'Manage Users');
                 //Get Users
                 $data['users'] = $this->user_model->get_users();
 
-                $this->load->view('templates/header');
+                $this->load->view('templates/header', $title);
                 $this->load->view('admin/index', $data);
                 $this->load->view('templates/footer');
             }else{
@@ -18,8 +18,8 @@
 
         public function create(){
             if($this->check_admin_permission()){
-                $data['title'] = 'Create User';
-        
+                
+                $title = array('title' => 'Create User');
                 $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
                 $this->form_validation->set_rules('password', 'Password', 'required');
                 $this->form_validation->set_rules('password2', 'Confirm Password', 'matches[password]');
@@ -28,8 +28,8 @@
                 $this->form_validation->set_rules('address', 'Home Address', 'required');
     
                 if($this->form_validation->run() === FALSE){
-                    $this->load->view('templates/header');
-                    $this->load->view('admin/create', $data);
+                    $this->load->view('templates/header', $title);
+                    $this->load->view('admin/create');
                     $this->load->view('templates/footer');
                 }else{
                     // Encrypt password
@@ -81,8 +81,10 @@
                     show_404();
                 }
 
-                $data['title'] = 'Edit User';
-                $this->load->view('templates/header');
+                
+                $title = array('title' => 'Edit Users');
+
+                $this->load->view('templates/header', $title);
                 $this->load->view('admin/edit', $data);
                 $this->load->view('templates/footer');
             }else{

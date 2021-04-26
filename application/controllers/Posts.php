@@ -1,10 +1,10 @@
 <?php
 	class Posts extends CI_Controller{
 		public function index($page = 'home'){
-			$data['title'] = 'Latest Posts';
+			$title = array('title' => 'Latest Posts');
             $data['posts'] = $this->post_model->get_posts();
 
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $title);
 			$this->load->view('posts/index', $data);
 			$this->load->view('templates/footer');
 		}
@@ -16,8 +16,8 @@
 				show_404();
 			}
 
-			$data['title'] = $data['post']['title'];
-			$this->load->view('templates/header');
+			$title = array('title' => 'View Post');
+			$this->load->view('templates/header', $title);
 			$this->load->view('posts/view', $data);
 			$this->load->view('templates/footer');
 		}
@@ -27,14 +27,14 @@
 				redirect('users/login');
 			}
 
-			$data['title'] = 'Create Post';
+			$title = array('title' => 'Create Post');
             
 			$this->form_validation->set_rules('title', 'Title', 'required|callback_check_slug_exists');
 			$this->form_validation->set_rules('body', 'Body', 'required');
 
 			if($this->form_validation->run() === FALSE){
-				$this->load->view('templates/header');
-				$this->load->view('posts/create', $data);
+				$this->load->view('templates/header', $title);
+				$this->load->view('posts/create');
 				$this->load->view('templates/footer');
 			}else{
 				$this->post_model->create_post();
@@ -75,8 +75,8 @@
 			$this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('body', 'Body', 'required');
 
-			$data['title'] = 'Edit Post';
-			$this->load->view('templates/header');
+			$title = array('title' => 'Edit Post');
+			$this->load->view('templates/header', $title);
 			$this->load->view('posts/edit', $data);
 			$this->load->view('templates/footer');
 		}

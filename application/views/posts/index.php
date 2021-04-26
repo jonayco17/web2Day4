@@ -1,9 +1,12 @@
-<h2><?= $title ?></h2>
 <?php foreach($posts as $post) :?>
-    <h3><?= $post['title'] ?></h3>
-    <small><?= $post['created_at']?></small><br>
-    <?= $post['body'] ?>
-    <p><a href="<?= site_url('/posts/'.$post['slug']) ?>">
-        Read More
-    </a></p>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title"><?= $post['title'] ?></h3><br>
+            <small><?= $post['created_at']?></small>
+            <p class="card-text"><?= $post['body'] ?></p>
+            <p class="card-link"><a href="<?= site_url('/posts/'.$post['slug']) ?>">
+                Read More
+            </a></p>
+        </div>
+    </div>
 <?php endforeach; ?>

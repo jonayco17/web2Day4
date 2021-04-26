@@ -5,7 +5,7 @@
 				redirect('/');
 			}
 
-            $data['title'] = 'Create An Account';
+            $title = array('title' => 'Create An Account');
         
             $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
             $this->form_validation->set_rules('password', 'Password', 'required');
@@ -15,8 +15,8 @@
             $this->form_validation->set_rules('address', 'Home Address', 'required');
 
             if($this->form_validation->run() === FALSE){
-                $this->load->view('templates/header');
-                $this->load->view('users/register', $data);
+                $this->load->view('templates/header', $title);
+                $this->load->view('users/register');
                 $this->load->view('templates/footer');
             }else{
                 // Encrypt password
@@ -36,14 +36,15 @@
 				redirect('home');
 			}
 
-            $data['title'] = 'Log-in';
+            
+            $title = array('title' => 'Log-in');
         
             $this->form_validation->set_rules('username', 'Username', 'required');
             $this->form_validation->set_rules('password', 'Password', 'required');
 
             if($this->form_validation->run() === FALSE){
-                $this->load->view('templates/header');
-                $this->load->view('users/login', $data);
+                $this->load->view('templates/header', $title);
+                $this->load->view('users/login');
                 $this->load->view('templates/footer');
             }else{
                 
@@ -83,6 +84,7 @@
                 $this->session->unset_userdata('logged_in');
                 $this->session->unset_userdata('user_id');
                 $this->session->unset_userdata('username');
+                $this->session->unset_userdata('user_type');
 
                 $this->session->set_flashdata('user_success', 'User Logged Out');
             
