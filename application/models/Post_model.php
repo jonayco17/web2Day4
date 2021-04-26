@@ -48,4 +48,15 @@
             return $this->db->update('posts', $data);
 
         }
+
+        public function check_slug_exists($slug){
+
+            $query = $this->db->get_where('posts', array('slug' => $slug, ));
+
+            if(empty($query->row_array())){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }

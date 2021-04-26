@@ -24,7 +24,7 @@
 
                 $this->user_model->register($enc_password);
 
-                $this->session->set_flashdata('user_registered', 'Registered Successfully');
+                $this->session->set_flashdata('user_success', 'Registered Successfully');
 
                 redirect('/');
             }
@@ -61,16 +61,16 @@
 
                     $this->session->set_userdata($login_data);
 
-                    $this->session->set_flashdata('user_loggedin', 'Login Successful');
+                    $this->session->set_flashdata('user_success', 'Login Successful');
 
                     redirect('/');
                 }elseif($user_data['status'] === 'pending'){
-                    $this->session->set_flashdata('login_failed', 'User Needs Admin Approval');
+                    $this->session->set_flashdata('user_error', 'User Needs Admin Approval');
 
                     redirect('/');
                 }
                 else{
-                    $this->session->set_flashdata('login_failed', 'Login Failed');
+                    $this->session->set_flashdata('user_error', 'Login Failed');
 
                     redirect('users/login');
                 }
@@ -82,7 +82,7 @@
             $this->session->unset_userdata('user_id');
             $this->session->unset_userdata('username');
 
-            $this->session->set_flashdata('user_loggedout', 'User Logged Out');
+            $this->session->set_flashdata('user_success', 'User Logged Out');
         
             redirect('users/login');
         }

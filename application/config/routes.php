@@ -59,6 +59,7 @@ $route['posts/(:any)'] = 'posts/view/$1';
 //Admins
 $route['admin'] = 'admin/index';
 $route['admin/update'] = 'admin/update';
+$route['admin/create'] = 'admin/create';
 
 $route['(:any)'] = 'pages/view/$1';
 

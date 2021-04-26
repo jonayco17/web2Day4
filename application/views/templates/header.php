@@ -30,39 +30,19 @@
 
         <div class="container">
 
-            <?php if($this->session->flashdata('user_registered')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_registered').'</p>'?>
+            <?php if($this->session->flashdata('post_success')):?>
+                <?= '<p class="alert alert-success">'.$this->session->flashdata('post_success').'</p>'?>
             <?php endif ?>
 
-            <?php if($this->session->flashdata('post_created')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('post_created').'</p>'?>
+            <?php if($this->session->flashdata('post_error')):?>
+                <?= '<p class="alert alert-success">'.$this->session->flashdata('post_error').'</p>'?>
             <?php endif ?>
 
-            <?php if($this->session->flashdata('post_updated')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('post_updated').'</p>'?>
+            <?php if($this->session->flashdata('user_error')):?>
+                <?= '<p class="alert alert-danger">'.$this->session->flashdata('user_error').'</p>'?>
             <?php endif ?>
 
-            <?php if($this->session->flashdata('post_deleted')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('post_deleted').'</p>'?>
-            <?php endif ?>
-
-            <?php if($this->session->flashdata('user_loggedin')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_loggedin').'</p>'?>
-            <?php endif ?>
-
-            <?php if($this->session->flashdata('login_failed')):?>
-                <?= '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'?>
-            <?php endif ?>
-
-            <?php if($this->session->flashdata('user_loggedout')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'?>
-            <?php endif ?>
-
-            <?php if($this->session->flashdata('user_status')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_status').'</p>'?>
-            <?php endif ?>
-
-            <?php if($this->session->flashdata('user_updated')):?>
-                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_updated').'</p>'?>
+            <?php if($this->session->flashdata('user_success')):?>
+                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_success').'</p>'?>
             <?php endif ?>
 

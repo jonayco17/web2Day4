@@ -29,7 +29,7 @@
 
 			$data['title'] = 'Create Post';
             
-			$this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('title', 'Title', 'required|callback_check_slug_exists');
 			$this->form_validation->set_rules('body', 'Body', 'required');
 
 			if($this->form_validation->run() === FALSE){
@@ -39,7 +39,7 @@
 			}else{
 				$this->post_model->create_post();
 
-				$this->session->set_flashdata('post_created', 'Posted Successfully');
+				$this->session->set_flashdata('post_success', 'Posted Successfully');
 
 				redirect('/');
 			}
@@ -52,7 +52,7 @@
 
 			$this->post_model->delete_post($id);
 
-			$this->session->set_flashdata('post_deleted', 'Post Deleted Successfully');
+			$this->session->set_flashdata('post_success', 'Post Deleted Successfully');
 
 			redirect('/');
 		}
@@ -88,8 +88,19 @@
 
 			$this->post_model->update_post();
 
-			$this->session->set_flashdata('post_updated', 'Post Updated Successfully');
+			$this->session->set_flashdata('post_success', 'Post Updated Successfully');
 
 			redirect('/');
 		}
+
+		public function check_slug_exists($title){
+			$this->form_validation->set_message('check_slug_exists', 'The Title already exists.');
+			$slug = url_title($title);
+
+            if($this->post_model->check_slug_exists($slug)){
+                return true;
+            }else{
+                return false;
+            }
+        }
 	}

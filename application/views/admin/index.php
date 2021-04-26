@@ -1,4 +1,9 @@
 <h2><?= $title ?></h2>
+<p><a href="<?= site_url('/admin/create/') ?>">
+        New User
+</a></p>
+
+
 <?php foreach($users as $user) :?>
     <small>id no.<?= $user['id']?></small>
     <h3><?= $user['username'] ?></h3>
