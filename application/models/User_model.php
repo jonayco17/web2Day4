@@ -75,7 +75,7 @@
             }
         }
 
-        public function update_user(){
+        public function update_user($enc_password){
             $data= array(
                 'username' => $this->input->post('username'),
                 'password' => $enc_password,

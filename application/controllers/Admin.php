@@ -63,7 +63,9 @@
 		public function update(){
 			if($this->check_admin_permission()){
 
-                $this->post_model->update_user();
+                $enc_password = md5($this->input->post('password'));
+
+                $this->user_model->update_user($enc_password);
 
                 $this->session->set_flashdata('user_updated', 'User Updated Successfully');
 

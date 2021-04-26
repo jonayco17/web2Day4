@@ -5,7 +5,7 @@
     <input type="hidden" name="id" value="<?= $user['id'] ?>">
     <div class="form-group">
         <label>Username</label>
-        <input type="text" class="form-control" name="username" value="<?= $user['id'] ?>">
+        <input type="text" class="form-control" name="username" value="<?= $user['username'] ?>">
     </div>
     <div class="form-group">
         <label>Password</label>
