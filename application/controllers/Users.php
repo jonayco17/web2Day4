@@ -1,6 +1,10 @@
 <?php
     class Users extends CI_Controller{
         public function register(){
+            if($this->session->userdata('logged_in')){
+				redirect('/');
+			}
+
             $data['title'] = 'Create An Account';
         
             $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
@@ -22,12 +26,16 @@
 
                 $this->session->set_flashdata('user_registered', 'Registered Successfully');
 
-                redirect('posts');
+                redirect('/');
             }
         }
 
 
         public function login(){
+            if($this->session->userdata('logged_in')){
+				redirect('home');
+			}
+
             $data['title'] = 'Log-in';
         
             $this->form_validation->set_rules('username', 'Username', 'required');
@@ -42,21 +50,26 @@
                 $username = $this->input->post('username');
                 $password = md5($this->input->post('password'));
 
-                $user_id =  $this->user_model->login($username, $password);
+                $user_data =  $this->user_model->login($username, $password);
 
-                if($user_id){
-                    $user_data = array(
-                        'user_id' => $user_id,
+                if($user_data['status'] === 'approved'){
+                    $login_data = array(
+                        'user_id' => $user_data['id'],
                         'username' => $username,
                         'logged_in' => true,
                     );
 
-                    $this->session->set_userdata($user_data);
+                    $this->session->set_userdata($login_data);
 
                     $this->session->set_flashdata('user_loggedin', 'Login Successful');
 
-                    redirect('posts');
-                }else{
+                    redirect('/');
+                }elseif($user_data['status'] === 'pending'){
+                    $this->session->set_flashdata('login_failed', 'User Needs Admin Approval');
+
+                    redirect('/');
+                }
+                else{
                     $this->session->set_flashdata('login_failed', 'Login Failed');
 
                     redirect('users/login');

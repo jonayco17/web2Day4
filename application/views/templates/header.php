@@ -12,7 +12,6 @@
                     <ul class="navbar-nav">
                         
                         <li class="nav-item"><a href="<?php  echo base_url();?>">Home</a></li>
-                        <li class="nav-item"><a href="<?php echo base_url();?>posts">Blog</a></li>
                         
                         <?php if(!$this->session->userdata('logged_in')): ?>
                             <li class="nav-item"><a href="<?php echo base_url();?>users/register">Register</a></li>
@@ -55,5 +54,14 @@
             <?php endif ?>
 
             <?php if($this->session->flashdata('user_loggedout')):?>
-                <?= '<p class="alert alert-danger">'.$this->session->flashdata('user_loggedout').'</p>'?>
+                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'?>
             <?php endif ?>
+
+            <?php if($this->session->flashdata('user_status')):?>
+                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_status').'</p>'?>
+            <?php endif ?>
+
+            <?php if($this->session->flashdata('user_updated')):?>
+                <?= '<p class="alert alert-success">'.$this->session->flashdata('user_updated').'</p>'?>
+            <?php endif ?>
+

@@ -1,7 +1,7 @@
 <?php
 	class Posts extends CI_Controller{
 		public function index($page = 'home'){
-			$data['title'] = 'Lates Posts';
+			$data['title'] = 'Latest Posts';
             $data['posts'] = $this->post_model->get_posts();
 
 			$this->load->view('templates/header');
@@ -41,11 +41,8 @@
 
 				$this->session->set_flashdata('post_created', 'Posted Successfully');
 
-				redirect('posts');
+				redirect('/');
 			}
-
-
-			
 		}
 
 		public function delete($id){
@@ -57,7 +54,7 @@
 
 			$this->session->set_flashdata('post_deleted', 'Post Deleted Successfully');
 
-			redirect('posts');
+			redirect('/');
 		}
 
 		public function edit($slug){
@@ -68,12 +65,15 @@
 			$data['post'] = $this->post_model->get_posts($slug);
 
 			if($this->session->userdata('user_id') != $data['post']['user_id']){
-				redirect('posts');
+				redirect('/');
 			}
 
 			if(empty($data['post'])){
 				show_404();
 			}
+
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('body', 'Body', 'required');
 
 			$data['title'] = 'Edit Post';
 			$this->load->view('templates/header');
@@ -90,6 +90,6 @@
 
 			$this->session->set_flashdata('post_updated', 'Post Updated Successfully');
 
-			redirect('posts');
+			redirect('/');
 		}
 	}
