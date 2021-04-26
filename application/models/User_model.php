@@ -24,6 +24,7 @@
                 $user_data = array(
                     'id' => $result->row(0)->id,
                     'status' => $result->row(0)->status,
+                    'type' => $result->row(0)->type,
                 );
                                 
                 return $user_data;

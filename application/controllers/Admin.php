@@ -117,16 +117,15 @@
         }
 
         private function check_admin_permission(){
-            if(!$this->session->userdata('logged_in')){
+            if($this->session->userdata('logged_in') && $this->session->userdata('user_type') == 'admin'){
+                return true;
+            }else{
                 return false;
             }
-
-            $id = $this->session->userdata('user_id');
-            return $this->user_model->check_user_is_admin($id);
         }
+
         public function check_username_exists($username){
             $this->form_validation->set_message('check_username_exists', 'The Username is taken.');
-
 
             if($this->user_model->check_username_exists($username)){
                 return true;
@@ -137,7 +136,6 @@
 
         public function check_email_exists($email){
             $this->form_validation->set_message('check_email_exists', 'The Email is taken.');
-
 
             if($this->user_model->check_email_exists($email)){
                 return true;

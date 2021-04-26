@@ -56,6 +56,7 @@
                     $login_data = array(
                         'user_id' => $user_data['id'],
                         'username' => $username,
+                        'user_type' => $user_data['type'],
                         'logged_in' => true,
                     );
 
@@ -78,13 +79,18 @@
         }
 
         public function logout(){
-            $this->session->unset_userdata('logged_in');
-            $this->session->unset_userdata('user_id');
-            $this->session->unset_userdata('username');
+            if($this->session->userdata('logged_in')){
+                $this->session->unset_userdata('logged_in');
+                $this->session->unset_userdata('user_id');
+                $this->session->unset_userdata('username');
 
-            $this->session->set_flashdata('user_success', 'User Logged Out');
-        
-            redirect('users/login');
+                $this->session->set_flashdata('user_success', 'User Logged Out');
+            
+                redirect('users/login');
+			}else{
+                redirect('/');
+            }
+            
         }
 
 
